@@ -1,0 +1,41 @@
+.full-height__bg.login-view
+  img.login--logo(src="/assets/images/logo_pizza.png")
+  .full-heigh
+    .login-container
+      .bs-component.sign-in
+        .panel.panel-default
+          .panel-body
+            form(ng-submit="submit()")
+            .form-control-wrapper
+              label.sign-in-form Access Your 
+                br
+                |Acount:
+              select#select.form-control(ng-model="user", ng-required="boolean")
+                option(ng-repeat="user in users") {{user}}
+              a.btn.btn-default.btn-login(ng-click="submit(user)") LOGIN
+      .bs-component
+        .panel.panel-default
+          .panel-body
+            form(ng-submit="submit()")
+            .form-control-wrapper
+              label Create 
+                br
+                |Acount:
+              input.form-control(ng-model="newUser", placeholder="Choose user name")
+              input.form-control(ng-model="password", placeholder="Enter Password", type="password")
+              a.btn.btn-default.btn-login(ng-click="createUser(newUser)") Create Account 
+      
+.modal.fade#passwordModal
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') x
+        h4.modal-title Swap ID: {{id}}
+      .modal-body
+         
+        p Reference Event:
+
+      .modal-footer
+        button.btn.btn-default(type='button', data-dismiss='modal') Close
+        button.btn.btn-primary(type='button') View PDF
+

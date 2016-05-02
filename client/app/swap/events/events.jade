@@ -1,0 +1,32 @@
+navbar
+
+.internal--page__wrapper
+  .container
+    .row
+      .col-md-10.col-md-offset-1.text-center
+        h1 API: 
+            br
+            span.contract-id {{id}}
+        .col-md-6.col-md-offset-3
+          p.lead Tell the API satisfaction oracle how you left about the delivery. Remeber there is a 
+            strong 100% satisfaction guarantee!
+          .list-group
+            .list-group-item
+              .btn.btn-primary.btn-block(ng-click="rateSatisfaction(true)") Happy
+              .btn.btn-primary.btn-block(ng-click="rateSatisfaction(false)") Unhappy
+
+.modal.fade#pizzaConfirmation
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h4.modal-title  Contract Closed
+      .modal-body
+        p.lead(ng-show="isHappy") The contract paid the API maker! :)
+        p.lead(ng-show="!isHappy") The contract refunded your money.  
+.modal.fade#mining-transaction
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h4.modal-title  Mining transaction...
+      .modal-body

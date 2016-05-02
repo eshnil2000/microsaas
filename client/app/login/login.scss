@@ -1,0 +1,109 @@
+.thing-form {
+  margin: 20px 0;
+}
+
+.sign-in {
+  .panel-body {
+    min-height: 258px;
+  }
+  .sign-in-form {
+    margin-bottom: 1em;
+  }
+}
+
+.full-height__bg {
+  height:auto;
+  margin-top: -8em;
+  min-height:100vh;
+  padding-top: 27px;
+  //background: #e04f5c url('/assets/images/logo_pizza.png') center bottom no-repeat;
+  background-size: 100%;
+}
+
+.login--logo {
+  margin: 0 auto;
+  display: block;
+}
+
+.login-view {
+  .panel {
+    margin-top: 2em;
+    margin-bottom: 0;
+    background-color: #ea5d69;
+    box-shadow: none;
+    border: 2px solid #f2747f;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+  }
+  .panel-body {
+    padding: 30px;
+  }
+  .bs-component {
+    float: left;
+    width: 47%;
+    &:first-child {
+      margin-right: 5%;
+    }
+  }
+  label {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: -0.4px;
+    line-height: 1em;
+  }
+  .btn {
+    box-shadow: none;
+    color: #cf4956;
+    display: block;
+    margin: 1em auto;
+  }
+  select {
+    margin: 10px 0;
+    box-shadow: none;
+    border: 2px solid #fff;
+    &:focus,
+    &.form-control:focus{
+      box-shadow: none;
+    }
+  }
+  input {
+    margin: 10px 0;
+  }
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    text-align: center;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    text-align: center;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    text-align: center;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+  }
+}
+
+input.form-control:focus, 
+input[type=text]:focus, 
+input[type=password]:focus, 
+input[type=email]:focus, 
+input[type=number]:focus {
+  box-shadow: inset 0 -2px 0 #fff;
+}
+
+.login-container {
+  width: 72%;
+  max-width: 656px;
+  margin: 0 auto;
+  overflow: auto;
+}
+
+.navbar-text {
+  margin-left: 15px;
+}
+
+.btn-login {
+  margin-top: 2em;
+}

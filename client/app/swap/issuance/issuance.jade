@@ -1,0 +1,55 @@
+navbar
+
+toast
+.internal--page__wrapper
+  .container.issuance
+    .row
+      .col-md-10.col-md-offset-1.text-center
+        .col-md-8.col-md-offset-2
+          h1 API: 
+            br
+            span.contract-id {{contract.address}}
+          h1(ng-show="contractState.stateInt < 5") Status: 
+            span.status Open API contract
+          h1(ng-show="contractState.stateInt == 5") Status: 
+            span.status Closed API contract
+          .list-group.text-left
+            .list-group-item
+              p 
+                strong Contract Address: 
+                a.contract-detail(href="{{apiURL}}account?address={{contract.address}}", target="_blank")   {{contract.address}}
+              p 
+                strong Contract Balance: 
+                span.contract-detail {{contract.balance}}
+              p 
+                strong Price: 
+                span.contract-detail {{contractState.pizzaPrice}}
+              p 
+                strong Contract Status: 
+                span.contract-detail {{contractState.stateMessage}}
+              p
+                strong API: 
+                span.contract-detail {{contractState.pizzaToppings}}
+          .btn.btn-primary(ng-click="showOrderModal()", ng-show="name != 'pizzaMaker' && contractState.stateInt < 3") Fund API Contract To Order 
+          a(href="/swap/{{contract.address}}/events").btn.btn-primary( ng-show="contractState.stateMessage == 'Buyer funded API contract'") Rate Delivery Satisfaction
+
+      
+.modal.fade#sign-transaction
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type='button', data-dismiss='modal', aria-hidden='true') ×
+        h4.modal-title  Sign Transaction &amp; Fund Contract
+      .modal-body
+        .form-control-wrapper
+          input#inputEmail.form-control.empty(type='password', placeholder='Password', ng-model="password")
+          span.material-input
+      .modal-footer
+        button.btn.btn-default(type='button', data-dismiss='modal') Cancel 
+        button.btn.btn-primary(type='button', ng-click="orderPizza()") Send Transaction
+.modal.fade#mining-transaction
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h4.modal-title  Mining transaction...
+      .modal-body

@@ -1,0 +1,27 @@
+div.navbar.navbar-inverse.navbar-fixed-top(ng-controller='NavbarController', ng-class="profile.name == 'pizzaMaker' ? 'dark' : ''")
+  div.container
+    div.navbar-header
+      button.navbar-toggle(type='button', ng-click='nav.isCollapsed = !nav.isCollapsed')
+        span.sr-only Toggle navigation
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      //- a.navbar-brand(href='/') pizza-swap
+
+    div#navbar-main.navbar-collapse.collapse(collapse='nav.isCollapsed')
+      a(href="/dashboard/{{profile.name}}")
+        img.logo--navbar__center(src="/assets/images/logo_pizza.png")
+      ul.pull-right.top-menu
+        li(ng-show="profile.name != ''")
+          .dropdown.icon-menu
+            button#dropdownMenu1.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown',  aria-haspopup='true', aria-expanded='true') 
+              span.glyphicon.glyphicon-user(aria-hidden='true') 
+              .profile-summary 
+                span.user-name {{profile.name}}
+                span.user-name UST: {{profile.balance}}
+            ul.dropdown-menu.pull-right(aria-labelledby='dropdownMenu1')
+              li
+                a(href='#') Settings 
+              li
+                a(ng-click="logout()") Logout
+  

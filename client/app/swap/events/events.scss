@@ -1,0 +1,99 @@
+.thing-form {
+  margin: 20px 0;
+}
+
+#banner {
+  border-bottom: none;
+  margin-top: -20px;
+}
+
+#banner h1 {
+  font-size: 60px;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.hero-unit {
+  position: relative;
+  padding: 30px 15px;
+  color: #F5F5F5;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  background: #4393B9;
+}
+
+.navbar-text {
+  margin-left: 15px;
+}
+
+.wizard-steps {
+  width: 1107px;
+  margin: 0 auto;
+
+}
+
+.visuallyhidden {
+    display: none;
+}
+
+.wizard-progress {
+    list-style: none;
+    list-style-image: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 20px;
+    float: left;
+    white-space: nowrap;
+}
+
+.wizard-progress li {
+    float: left;
+    margin-right: 57px;
+    text-align: center;
+    position: relative;
+    width: 100px;
+}
+
+.wizard-progress .step-name {
+    display: table-cell;
+    height: 32px;
+    vertical-align: bottom;
+    text-align: center;
+    width: 100px;
+}
+
+.wizard-progress .step-name-wrapper {
+    display: table-cell;
+    height: 100%;
+    vertical-align: bottom;
+}
+
+.wizard-progress .step-num {
+    font-size: 14px;
+    font-weight: bold;
+    border: 3px solid #cfcfcf;
+    border-radius: 50%;
+    width: 32px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.wizard-progress .step-num:after {
+    content: "";
+    display: block;
+    background: #cfcfcf;
+    height: 5px;
+    width: 130px;
+    position: absolute;
+    bottom: 13px;
+    left: 64px;
+}
+
+.wizard-progress li:last-of-type .step-num:after {
+    display: none;
+}
+
+.wizard-progress .active-step .step-num {
+    background-color: #4caf50;
+    color: #fff;
+}

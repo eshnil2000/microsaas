@@ -1,0 +1,80 @@
+// $icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+// @import '../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap';
+// $fa-font-path: "../bower_components/font-awesome/fonts";
+// @import '../bower_components/font-awesome/scss/font-awesome';
+    
+/* ADD MATERIAL DESIGN */
+@import "../bower_components/bootswatch/paper/bootstrap.min.css";
+
+/**
+ * App-wide Styles
+ */
+
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+$red-text: #d54c58;
+$blue-text: #285466;
+$gray: #363636;
+$gray-light: #eee;
+/**
+ * TYPOGRAPHY
+ */
+h1 {
+  color: $blue-text;
+  font-weight: bold;
+  font-size: 2em;
+}
+h2 {
+  font-size: 1em;
+}
+a {
+  color: $gray;
+  &:hover {
+    color: lighten($gray, 20%);
+  }
+}
+
+body {
+  padding-top: 8em;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.internal--page__wrapper {
+  //background:  url('/assets/images/logo_pizza.png') no-repeat top center;
+  background-size: 100%
+}
+
+#loading-bar-spinner .spinner-icon {
+}
+
+#loading-bar .bar {
+  background-color: #fff;
+}
+
+.btn-primary {
+  background-color: #285466;
+  &:hover {
+    background-color: #555555;
+  }
+  &:focus {
+    background-color: #555555;
+  }
+}
+
+
+// Component styles are injected through grunt
+// injector
+@import 'dashboard/dashboard.scss';
+@import 'login/login.scss';
+@import 'main/main.scss';
+@import 'swap/events/events.scss';
+@import 'swap/issuance/issuance.scss';
+@import 'swap/swap.scss';
+@import '../components/footer/footer.scss';
+@import '../components/navbar/navbar.scss';
+// endinjector

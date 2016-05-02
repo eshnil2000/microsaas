@@ -1,0 +1,6 @@
+appName: microsaas6
+developer: nik
+apiURL: 'http://strato-dev3.blockapps.net'
+transferGasLimit: 21000
+contractGasLimit: 10000000
+gasPrice: 50000000000

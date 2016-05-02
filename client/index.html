@@ -1,0 +1,196 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <base href="/">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(client) app/vendor.css -->
+      <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
+      <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+      <link rel="stylesheet" href="bower_components/ngToast/dist/ngToast.css" />
+      <!-- endbower -->
+    <!-- endbuild -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <!-- build:css({.tmp,client}) app/app.css -->
+      <link rel="stylesheet" href="app/app.css">
+      <!-- injector:css -->
+      <!-- endinjector -->
+    <!-- endbuild -->
+  </head>
+  <body ng-app="pizzaSwapApp">
+    <!--[if lt IE 7]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div ui-view=""></div>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-XXXXX-X');
+      ga('send', 'pageview');
+    </script>
+     <!--script src="http://localhost:8000/socket.io/socket.io.js"></script-->
+    <!--script src="http://strato-dev3.blockapps.net:8000/socket.io/socket.io.js"></script-->
+    <script>
+      /*var socket = io('http://localhost:8000');
+      var socket = io('http://strato-dev3.blockapps.net:8000');
+      socket.on('connect', function(){});
+      socket.on('event', function(data){});
+      socket.on('disconnect', function(){});*/
+    </script>
+
+    <div id="contract_source" style="display: none;">
+contract microAPI {
+  /**
+   * It is helpful to think of
+   * smart contracts as state machine.
+   * In this example:
+   * State 1: Deploy new smart pizza contract
+   * State 2: Set pizza details; price, toppings, and guarante
+   * State 3: Smart contract is funned by buyer
+   * State 4: Pizza is being delivered
+   * State 5: Pizzed has arrived and buyer has indicated the satisfaction level
+   */
+
+  address seller;
+  address buyer;
+  address oracle;
+  address satisfactionOracle;
+
+  uint pizzaPrice;
+  uint guarantee;
+  uint eth = 1000000000000000000;
+
+  string pizzaToppings;
+  string stateMessage;
+  string message;
+  uint stateInt;
+  uint stateCount = 0;
+
+  function microAPI() {
+    seller = msg.sender;
+
+    stateMessage = "Uploaded API smart contract";
+    stateInt = 1;
+
+    message = stateMessage;
+    //eth = 1000000000000000000; // for some reason constructor isn't called
+  }
+
+  function setUpPizzaDetails(uint price, string topping) {
+    stateMessage = "API details set";
+    message = stateMessage;
+    stateInt = 2;
+    pizzaPrice = price;
+    pizzaToppings = topping;
+  }
+
+  function buyerAcceptsPizzaContract() {
+    message = "why is this breaking";
+    if (msg.value >=  eth * pizzaPrice) {
+      buyer = msg.sender;
+      stateInt = 3;
+      stateMessage = "Buyer funded API contract";
+      message = stateMessage;
+      // TODO - refund change ??
+    } else {
+      msg.sender.send(msg.value);
+      message = "Contract not funded. Refunded money";
+    }
+  }
+
+  function pizzaAccepted() {
+    if (msg.sender == buyer) {
+      stateInt = 4;
+      stateMessage = "API Delivered";
+      message = stateMessage;
+      seller.send(this.balance);
+    } else {
+      message = "Only buyer can accept";
+    }
+  }
+
+  function rateSatisfaction(bool isHappy) {
+    
+    if (isHappy) {
+      
+          stateMessage = "API delivered, buyer was happy";
+          //seller.send(this.balance);
+          if(this.balance >= 5*eth){
+            seller.send(5*eth); // send "5 eth"
+          } else {
+            // contract is out of funds
+            stateInt = 5;
+            stateMessage = "Contract is out of funds, please refill or buy new contract";
+          }
+    } else {
+      stateMessage = "API delivered, buyer was not happy";
+      buyer.send(this.balance);
+    }
+  }
+ 
+}</div>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+    <!-- build:js({client,node_modules}) app/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+      <script src="bower_components/angular-resource/angular-resource.js"></script>
+      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
+      <script src="bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js"></script>
+      <script src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+      <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+      <script src="bower_components/ngToast/dist/ngToast.js"></script>
+      <script src="bower_components/angular-socket-io/socket.js"></script>
+      <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js(.tmp) app/app.js -->
+      <script src="app/app.js"></script>
+      <!-- injector:js -->
+      <script src="components/util/util.module.js"></script>
+      <script src="app/swap/issuance/issuance.controller.js"></script>
+      <script src="app/dashboard/dashboard.router.js"></script>
+      <script src="app/login/login.controller.js"></script>
+      <script src="app/login/login.router.js"></script>
+      <script src="app/main/main.controller.js"></script>
+      <script src="app/main/main.js"></script>
+      <script src="app/swap/events/events.controller.js"></script>
+      <script src="app/swap/events/events.router.js"></script>
+      <script src="app/dashboard/dashboard.controller.js"></script>
+      <script src="app/swap/issuance/issuance.router.js"></script>
+      <script src="app/swap/swap.controller.js"></script>
+      <script src="app/swap/swap.router.js"></script>
+      <script src="components/footer/footer.directive.js"></script>
+      <script src="components/navbar/navbar.controller.js"></script>
+      <script src="components/navbar/navbar.directive.js"></script>
+      <script src="app/app.constant.js"></script>
+      <script src="components/util/util.service.js"></script>
+      <!-- endinjector -->
+    <!-- endbuild -->
+  </body>
+</html>
