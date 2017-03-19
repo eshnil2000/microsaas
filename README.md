@@ -39,7 +39,7 @@ change the user account numbers, and the contract account numbers
 based on the new users & contracts you create
 
 
-####Write up from devpost
+#### Write up from devpost
 Inspiration
 We want to free users from vendor lock in, allows switching vendors on the fly depending on the use case, performance demands & verifiable proof of vendor service level.
 
